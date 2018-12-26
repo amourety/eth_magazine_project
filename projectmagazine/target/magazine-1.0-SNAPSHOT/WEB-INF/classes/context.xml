@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+     <bean class="services.ContactServiceImpl" name="contactService">
+         <constructor-arg ref="contactRepository"/>
+     </bean>
+    <bean class="services.AuthServiceImpl" name="authService">
+        <constructor-arg ref="authRepository"/>
+    </bean>
+    <bean class="services.LoginServiceImpl" name="loginService">
+        <constructor-arg ref="authRepository"/>
+        <constructor-arg ref="usersRepositoryJdbcTemplate"/>
+    </bean>
+    <bean class="services.ProductServiceImpl" name="productService">
+        <constructor-arg ref="productsRepository"/>
+    </bean>
+    <bean class="services.SearchServiceImpl" name="searchService">
+        <constructor-arg ref="productsRepository"/>
+    </bean>
+    <bean class="services.ShopServiceImpl" name="shopService">
+        <constructor-arg ref="basketRepository"/>
+        <constructor-arg ref="productsRepository"/>
+        <constructor-arg ref="orderRepository"/>
+    </bean>
+    <bean class="services.UsersServiceImpl" name="usersService">
+        <constructor-arg ref="usersRepositoryJdbcTemplate"/>
+        <constructor-arg ref="authRepository"/>
+    </bean>
+
+
+    <bean class="repositories.ProductsRepositoryJdbcTemplateImpl" name="productsRepository">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean class="repositories.AuthRepositoryImpl" name="authRepository">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean class="repositories.BasketRepositoryImpl" name="basketRepository">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean class="repositories.ContactRepositoryImpl" name="contactRepository">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean class="repositories.UsersRepositoryJdbcTemplateImpl" name="usersRepositoryJdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean class="repositories.OrderRepositoryImpl" name="orderRepository">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" name="dataSource">
+        <property name="url" value="jdbc:postgresql://localhost:5432/db_11_702"/>
+        <property name="username" value="postgres"/>
+        <property name="password" value="di9cbdy4"/>
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+    </bean>
+
+
+</beans>

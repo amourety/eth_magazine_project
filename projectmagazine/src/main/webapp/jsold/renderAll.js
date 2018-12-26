@@ -1,0 +1,4 @@
+function renderAll(){
+    getData();
+    renderCatalogFromDb();
+}
